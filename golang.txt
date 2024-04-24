@@ -1,0 +1,104 @@
+ package main
+
+import (
+	"fmt"
+	"log"
+)
+
+func main() {
+	log.Println("Starting the program...")
+
+	a, b := 10, 5
+
+	additionResult := add(a, b)
+	log.Println("Addition result:", additionResult)
+
+	subtractionResult := subtract(a, b)
+	log.Println("Subtraction result:", subtractionResult)
+
+	multiplicationResult := multiply(a, b)
+	log.Println("Multiplication result:", multiplicationResult)
+
+	divisionResult, err := divide(a, b)
+	if err != nil {
+		log.Println("Error occurred:", err)
+	} else {
+		log.Println("Division result:", divisionResult)
+	}
+
+	log.Println("Program finished.")
+}
+
+func add(a, b int) int {
+	return a + b
+}
+
+func subtract(a, b int) int {
+	return a - b
+}
+
+func multiply(a, b int) int {
+	return a * b
+}
+
+func divide(a, b int) (float64, error) {
+	if b == 0 {
+		return 0, fmt.Errorf("division by zero")
+	}
+	return float64(a) / float64(b), nil
+}
+package main
+
+import (
+	"fmt"
+	"errors"
+	"log"
+)
+
+type Operation struct {
+	Name   string
+	Result interface{}
+}
+
+func main() {
+	log.Println("Starting the program...")
+
+	// Perform some basic arithmetic operations
+	a, b := 10, 5
+
+	logOperation("addition", add(a, b))
+	logOperation("subtraction", subtract(a, b))
+	logOperation("multiplication", multiply(a, b))
+
+	divisionResult, err := divide(a, b)
+	if err != nil {
+		log.Println("Error occurred:", err)
+	} else {
+		logOperation("division", divisionResult)
+	}
+
+	log.Println("Program finished.")
+}
+
+func logOperation(name string, result interface{}) {
+	log.Printf("Operation: %s, Result: %v\n", name, result)
+}
+
+func add(a, b int) int {
+	return a + b
+}
+
+func subtract(a, b int) int {
+	return a - b
+}
+
+func multiply(a, b int) int {
+	return a * b
+}
+
+func divide(a, b int) (float64, error) {
+	if b == 0 {
+		return 0, errors.New("division by zero")
+	}
+	return float64(a) / float64(b), nil
+}
